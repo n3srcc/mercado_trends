@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit-icons.min.js"></script>
+    </head>
+    <body>
+
+        <div>
+            <div>
+                <nav class="uk-navbar-container" uk-navbar>
+                    <div class="uk-navbar-center">
+                
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active"><a href="#">Inicio</a></li>
+                            <li>
+                                <a href="#">Fundas Cargadoras</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li class="uk-active"><a href="/fundas-cargadoras">Más caras</a></li>
+                                        <li><a href="/top-sellers">Top Sellers</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="·">Login</a></li>
+                        </ul>
+                
+                    </div>
+                </nav>
+            </div>
+            <main>
+            <div id="app">
+                <div class="uk-section uk-section-muted uk-section-small">
+                <div class="uk-container" >
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                </div>
+            </div>
+            </main>
+        </div>
+    </body>
+</html>

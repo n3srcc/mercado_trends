@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for result in results %}
+<div class="uk-flex-middle" uk-grid>
+    <div class="uk-width-2-3@m">
+        <h3>{{result.title}}</h3>
+        <p>{{result.currency_id}} {{result.price}}</p>
+        <a class="uk-button uk-button-primary" target="_blank" href="{{result.permalink}}">ver detalles</a>
+    </div>
+    <div class="uk-width-1-3@m uk-flex-first uk-flex-right">
+        <img src="{{result.thumbnail}}" alt="Image">
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
