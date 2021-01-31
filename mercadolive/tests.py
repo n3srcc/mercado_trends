@@ -1,15 +1,27 @@
 from django.test import TestCase
+from unittest import mock
+from .services import request
+import json
 
-# Create your tests here.
+class MeliTestCase(TestCase):
+    
+    @mock.patch('mercadolive.services.request')
+    # @patch.object(request, 'ook', Mock(return_value=None))
+    def test_request(self, mock_get):
+        # with patch('mercadolive.services.request') as mock_get:
+        mock_response = mock.Mock()
+        expected_dict = json.dumps({'site_id': 'MLA'})
+        # Define response data for my Mock object
+        mock_response.json.return_value = expected_dict
+        mock_response.status_code = 200
 
-class AnimalTestCase(TestCase):
-    def setUp(self):
-        Animal.objects.create(name="lion", sound="roar")
-        Animal.objects.create(name="cat", sound="meow")
+        # mock_get.return_value.status_code = 200
+        # mock_get.return_value.json.return_value = fake_json
 
-    def test_animals_can_speak(self):
-        """Animals that can speak are correctly identified"""
-        lion = Animal.objects.get(name="lion")
-        cat = Animal.objects.get(name="cat")
-        self.assertEqual(lion.speak(), 'The lion says "roar"')
-        self.assertEqual(cat.speak(), 'The cat says "meow"')
+        # Define response for the fake API
+        mock_get.return_value = mock_response
+
+        response = request()
+        print("text: ", response.json())
+        # self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), expected_dict)

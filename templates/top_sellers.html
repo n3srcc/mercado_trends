@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-top sellers
+
+<h3>Mejores vendedores en Fundas Cargadoras</h3>
+
+{% for seller in sellers %}
+<div class="uk-flex uk-flex-left">
+    <ul class="uk-list">
+        <li>{{seller.nickname}}</li>
+    </ul>
+</div>
+{% endfor %}
+
 {% endblock %}

@@ -35,20 +35,19 @@ def top_sellers(request):
 
         for product in results:
             nickname = product.get('seller').get('permalink').split("/")[-1]
-            product_details = { 'id': product.get('id'), 'sold_quantity': product.get('sold_quantity'), 'seller_nickname': nickname}
+            product_details = { 'id': product.get('id'), 'sold_quantity': product.get('sold_quantity'), 'nickname': nickname}
             products.append(product_details)
     
-    final_products = { each['seller_nickname']: each for each in products }.values()
+    sellers = { each['nickname']: each for each in products }.values()
+    top_sellers = list(sellers)
+    top_sellers.sort(key=lambda x: x['sold_quantity'], reverse=True)
 
-    products = list(final_products)
-
-    products.sort(key=lambda x: x['sold_quantity'], reverse=True)
-
-    # for product in products[:10]:
-    #     print(product)
-
-    return render(request, "top_sellers.html", {})
+    return render(request, "top_sellers.html", {'sellers': top_sellers[:10]})
 
 def articles(request):
-    res_dict = json.loads(most_expansive())
-    return render(request, "articles.html", res_dict)
+    try:
+        res_dict = json.loads(most_expansive().text)
+        return render(request, "articles.html", res_dict)
+        
+    except:
+        raise
